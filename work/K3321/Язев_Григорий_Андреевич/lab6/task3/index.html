@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Язев Г.А.</title>
+</head>
+    <link rel="stylesheet" href="style.css">
+<body>
+
+<h2></h2>
+
+<div id="image-container">
+    <img src="web_lab5.png" usemap="#image-map" alt="Карта" id="main-image">
+    <img id="png-overlay" src="экран_ненорм.png" alt="Overlay PNG">
+</div>
+
+<map name="image-map">
+    <!-- Воспроизведение аудио 1-->
+    <area shape="poly" coords="1093,649,881,652,884,451,1091,455" onclick="playAudio('sound1.mp3')" href="#">
+
+    <!-- Воспроизведение аудио 2 -->
+    <area shape="circle" coords="1261,536,125" onclick="playAudio('sound2.mp3')" href="#">
+
+    <!-- Всплывающее окно -->
+    <area shape="poly" coords="699,511,740,584,787,508" onclick="showPopup()" href="#">
+
+    <!--Отобразит PNG -->
+    <area shape="rect" coords="801,699,703,911" onclick="showPNG()" href="#">
+
+    <!--Ссылка на сайт-->
+    <area shape="rect" coords="569,28,1403,542" href="https://yandex.ru/pogoda/2?lat=59.969051&lon=30.431837&utm_source=serp&utm_campaign=helper&utm_medium=desktop&utm_content=helper_desktop_main&utm_term=title" target="_blank">
+</map>
+
+<div id="popup">Осторожно, горячо!</div>
+
+<audio id="audio-player" src=""></audio>
+
+<script>
+    let audio = document.getElementById('audio-player');   
+    let audioTimeout; 
+    function playAudio(src) {
+        audio.pause();         
+        audio.currentTime = 0; 
+        audio.src = src;
+        audio.volume = 0.25;
+        audio.play();   
+    if (audioTimeout) {
+        clearTimeout(audioTimeout);
+        }
+
+
+    audio.onplaying = () => {
+         audioTimeout = setTimeout(() => {
+            audio.pause();
+            audio.currentTime = 0;
+        }, 33000);
+    };
+
+    audio.play().catch(error => {
+        console.error("Ошибка при воспроизведении:", error);
+    });
+}
+function showPopup() {
+        const popup = document.getElementById('popup');
+        popup.style.display = 'block';
+        setTimeout(() => popup.style.display = 'none', 5000);
+    }
+
+    function showPNG() {
+        const overlay = document.getElementById('png-overlay');
+        overlay.style.display = 'block';
+        setTimeout(() => overlay.style.display = 'none', 10000);
+    }
+</script>
+
+</body>
+</html>
