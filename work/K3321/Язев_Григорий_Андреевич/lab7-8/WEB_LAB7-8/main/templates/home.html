@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="gallery">
+  {% for tech in techniques%}
+  <a href="{% url 'technique_detail' tech.id %}" class="gallery-item">
+    <img src="{{ tech.thumbnail.url }}" alt="{{ tech.title }}">
+    <p>{{ tech.title }}</p>
+  </a>
+  {% endfor %}
+</div>
+{% endblock %}

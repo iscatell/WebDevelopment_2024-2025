@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}{{ technique.title }}{% endblock %}
+
+{% block content %}
+<div class="tech-detail">
+    <h2>{{ technique.title }}</h2>
+    <img src="{{ technique.image.url }}" alt="{{ technique.title }}" class="tech-image">
+    <p>{{ technique.description }}</p>
+    <a href="/" class="back-link">← Назад к списку</a>
+</div>
+{% endblock %}

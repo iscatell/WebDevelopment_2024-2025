@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Полученные сообщения</h2>
+  <form method="post" action="{% url 'clear_messages' %}">
+    {% csrf_token %}
+    <button type="submit" onclick="return confirm('Вы уверены, что хотите удалить все сообщения?');">Очистить все сообщения</button>
+  </form>
+  <ul>
+    {% for m in messages %}
+      <li><strong>{{ m.name }}</strong> ({{ m.email }}) — {{ m.message }} [{{ m.submitted_at }}]</li>
+    {% empty %}
+      <li>Сообщений нет.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
